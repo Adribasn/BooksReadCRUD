@@ -22,7 +22,7 @@ function App() {
       </nav>
       <Switch>
         <Route exact path='/' component={BookList} />
-        <Route exact path='/edit' component={EditBook} />
+        <Route path='/edit' component={EditBook} />
         <Route exact path='/add' component={AddBook} />
       </Switch>
       

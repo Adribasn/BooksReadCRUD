@@ -7,6 +7,7 @@ export const BookList = () => {
     useEffect(() => {
         setItems([
             {title: "The maze runner", author: "James Dashner", date: "09/11/2020", rating: "3"},
+            {title: "The Final Empire", author: "Brandon Sanderson", date: "18/06/2021", rating: "4.5"},
         ])
     }, [])
 
@@ -14,14 +15,16 @@ export const BookList = () => {
         <div className='container'>
             <div className="mt-3">
                 <table className="table table-striped mt-3">
-                    <thread>
+                    <thead>
                         <tr>
                             <th>Title</th>
                             <th>Author</th>
                             <th>Date</th>
                             <th>Rating</th>
+                            <th></th>
+                            <th></th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                         {
                         items.map(book => (
@@ -39,7 +42,10 @@ export const BookList = () => {
                                     {book.rating}
                                 </td>
                                 <td>
-                                    <Link to={`/edit/${book.id}`}>Edit</Link>
+                                    <Link to={`/edit/${book.id}`} className="btn btn-primary" role="button">Edit</Link>
+                                </td>
+                                <td>
+                                    <Link to={``} className="btn btn-danger" role="button">Delete</Link>
                                 </td>
                             </tr>
                         ))
