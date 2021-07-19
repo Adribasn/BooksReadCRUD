@@ -18,7 +18,6 @@ export const AddBook = () => {
             history.push('/');
         }
     })
-    
 
     return (
     <div className='container'>
