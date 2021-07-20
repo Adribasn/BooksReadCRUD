@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 export const BookList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        setItems([
-            {title: "The maze runner", author: "James Dashner", date: "09/11/2020", rating: "3"},
-            {title: "The Final Empire", author: "Brandon Sanderson", date: "18/06/2021", rating: "4.5"},
-        ])
+        Axios.get("http://localhost:3001/read").then((response) => {
+            setItems(response.data);
+        })
     }, [])
+    
 
     return (
         <div className='container'>
@@ -27,22 +28,22 @@ export const BookList = () => {
                     </thead>
                     <tbody>
                         {
-                        items.map(book => (
-                            <tr key={book.id}>
+                        items.map((val,key) => (
+                            <tr key={key}>
                                 <td>
-                                    {book.title}
+                                    {val.title}
                                 </td>
                                 <td>
-                                    {book.author}
+                                    {val.author}
                                 </td>
                                 <td>
-                                    {book.date}
+                                    {val.date}
                                 </td>
                                 <td>
-                                    {book.rating}
+                                    {val.rating}
                                 </td>
                                 <td>
-                                    <Link to={`/edit/${book.id}`} className="btn btn-primary" role="button">Edit</Link>
+                                    <Link to={`/edit/${key}`} className="btn btn-primary" role="button">Edit</Link>
                                 </td>
                                 <td>
                                     <Link to={``} className="btn btn-danger" role="button">Delete</Link>
