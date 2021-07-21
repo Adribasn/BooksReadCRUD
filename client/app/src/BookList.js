@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
@@ -6,10 +6,14 @@ export const BookList = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/read").then((response) => {
+        Axios.get("http://localhost:3001/read").then((response) => {
             setItems(response.data);
         })
     })
+
+    const DeleteBook = (id) => {
+        Axios.delete(`http://localhost:3001/delete/${id}`);
+    }
 
     return (
         <div className='container'>
@@ -38,7 +42,7 @@ export const BookList = () => {
                                             <Link role="button" className="btn btn-primary" to={`/update/${val._id}`}>Edit</Link>
                                         </td>
                                         <td>
-                                            <Link role="button" className="btn btn-danger">Delete</Link>
+                                            <Link role="button" className="btn btn-danger" onClick={() => DeleteBook(val._id)}>Delete</Link>
                                         </td>
                                     </tr>
                                 )

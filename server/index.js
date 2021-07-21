@@ -21,7 +21,7 @@ app.post('/create', async(req,res) => {
 
     try {
         await book.save();
-        res.send('created book');
+        res.send('created');
     } catch (err) {
         console.log(err);
     }
@@ -38,11 +38,31 @@ app.get('/read', (req,res) => {
 });
 
 app.put('/update', async(req,res) => {
+    const newTitle = req.body.newTitle;
+    const newAuthor = req.body.newAuthor;
+    const newDate = req.body.newDate;
+    const newRating = req.body.newRating;
+    const id = req.body.id;
 
+    try {
+        BookModel.findById(id, (err, updatedBook) => {
+            updatedBook.title = newTitle;
+            updatedBook.author = newAuthor;
+            updatedBook.date = newDate;
+            updatedBook.rating = newRating;
+        })
+
+        res.send('updated')
+    } catch (err) {
+        console.log(err);
+    }
 });
 
-app.delete('/delete', async(req,res) => {
+app.delete('/delete/:id', async(req,res) => {
+    const id = req.params.id;
 
+    await BookModel.findByIdAndRemove(id).exec();
+    res.send('deleted');
 })
 
 app.listen('3001', () => {
