@@ -1,10 +1,9 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
+import Axios from 'axios';
 
 
-export const AddBook = () => {
+export const CreateBook = () => {
     const history = useHistory();
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
@@ -12,12 +11,14 @@ export const AddBook = () => {
     const [rating, setRating] = useState(0);
 
     const addToList = () => {
-        axios.post("http://localhost:3001/insert", {
+        Axios.post("http://localhost:3001/create", {
             title: title,
             author: author,
             date: date,
-            rating: rating,
+            rating: rating
         });
+
+        history.push('/');
     }
 
     return (
@@ -44,7 +45,7 @@ export const AddBook = () => {
                     }}></input>
                 </div>
                 <div className='form-group'>
-                    <button type='submit' className='btn btn-primary mt-2' onSubmit={addToList}>
+                    <button type='submit' className='btn btn-primary mt-2' onClick={addToList}>
                         Add 
                     </button>
                 </div>

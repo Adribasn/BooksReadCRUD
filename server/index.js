@@ -11,30 +11,29 @@ mongoose.connect('mongodb+srv://Adribas:Ereh59@bookscrud.21jdl.mongodb.net/book?
     useNewUrlParser: true,
 });
 
-app.post('/insert', async(req,res) => {
-    title = req.body.title;
-    author = req.body.author;
-    date = req.body.date;
-    rating = req.body.rating;
+app.post('/create', async(req,res) => {
+    const title = req.body.title;
+    const author = req.body.author;
+    const date = req.body.date;
+    const rating = req.body.rating;
 
-    const book = BookModel({ title: title, author: author, date: date, rating: rating});
+    const book = new BookModel({ title: title, author: author, date: date, rating: rating});
 
     try {
         await book.save();
-        res.send('inserted book');
-    } catch(err) {
+        res.send('created book');
+    } catch (err) {
         console.log(err);
     }
 });
 
-app.get('/read', async(req,res) => {
-    BookModel.find({}, (err, result) => {
+app.get('/read', (req,res) => {
+    BookModel.find({}, (err,result) => {
         if (err) {
-            console.log(err);
-            console.log("/read error");
-        } else {
-            res.send(result);
+            res.send(err);
         }
+
+        res.send(result);
     })
 });
 

@@ -2,8 +2,8 @@ import './App.css';
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { BookList } from './BookList';
-import { EditBook } from './EditBook';
-import { AddBook } from './AddBook';
+import { UpdateBook } from './UpdateBook';
+import { CreateBook } from './CreateBook';
 
 
 
@@ -16,16 +16,15 @@ function App() {
             <Link to='/' className='nav-link'>Books</Link>
           </li>
           <li className='navbar-item'> 
-            <Link to='/add' className='nav-link'>Add</Link>
+            <Link to='/create' className='nav-link'>Add</Link>
           </li>
         </ul>
       </nav>
       <Switch>
         <Route exact path='/' component={BookList} />
-        <Route path='/edit' component={EditBook} />
-        <Route exact path='/add' component={AddBook} />
+        <Route path='/update' component={UpdateBook} />
+        <Route exact path='/create' component={CreateBook} />
       </Switch>
-      
     </div>
   );
 }
